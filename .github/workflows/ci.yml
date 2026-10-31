@@ -20,6 +20,6 @@ jobs:
         env:
           DATABASE_URL: sqlite:///./ci.db
           MQTT_HOST: 127.0.0.1
-        run: pytest -q
+        run: run: python -m pytest -q
       - name: Build API container
         run: docker build -t fleettrack-api:${{ github.sha }} ./backend
