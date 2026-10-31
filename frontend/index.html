@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FleetTrack | Operations</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/><link rel="stylesheet" href="style.css"></head>
+<body><header><div><div class="eyebrow">FLEET OPERATIONS</div><h1>FleetTrack</h1></div><div class="live"><span class="dot"></span><span id="connection">Connecting…</span></div></header>
+<main><section class="stats"><article><span>Total vehicles</span><strong id="total">0</strong></article><article><span>Moving</span><strong id="moving">0</strong></article><article><span>Ignition on</span><strong id="ignition">0</strong></article><article><span>Overspeed alerts</span><strong id="alerts">0</strong></article></section>
+<section class="layout"><article class="panel map-panel"><div class="panel-head"><div><h2>Live vehicle map</h2><p>Simulated GPS positions · refreshes in real time</p></div><button id="fit">Fit vehicles</button></div><div id="map"></div></article><article class="panel"><div class="panel-head"><div><h2>Vehicle fleet</h2><p>Latest reported state</p></div></div><div class="table-wrap"><table><thead><tr><th>Vehicle</th><th>Speed</th><th>Status</th></tr></thead><tbody id="vehicle-rows"><tr><td colspan="3">Waiting for telemetry…</td></tr></tbody></table></div></article></section>
+<section class="panel"><div class="panel-head"><div><h2>Recent alerts</h2><p>Overspeed events</p></div></div><div id="alert-list" class="alerts">No alerts yet.</div></section>
+<footer>FleetTrack DevOps Lab · Demo locations are simulated · Do not use for real-world dispatch</footer></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="app.js"></script></body></html>

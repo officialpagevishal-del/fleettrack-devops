@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleettrack-api
+  namespace: fleettrack
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: fleettrack-api}
+  template:
+    metadata:
+      labels: {app: fleettrack-api}
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+        - name: api
+          image: YOUR_ECR_URI/fleettrack-api:REPLACE_ME
+          ports: [{containerPort: 8000}]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef: {name: fleettrack-secrets, key: database-url}
+            - name: MQTT_HOST
+              value: mosquitto
+            - name: MQTT_PORT
+              value: "1883"
+          readinessProbe: {httpGet: {path: /health, port: 8000}, initialDelaySeconds: 5, periodSeconds: 10}
+          livenessProbe: {httpGet: {path: /health, port: 8000}, initialDelaySeconds: 10, periodSeconds: 20}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: 500m, memory: 512Mi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleettrack-api
+  namespace: fleettrack
+spec:
+  selector: {app: fleettrack-api}
+  ports: [{port: 8000, targetPort: 8000}]
